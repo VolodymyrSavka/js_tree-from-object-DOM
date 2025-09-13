@@ -21,7 +21,7 @@ const food = {
 const tree = document.querySelector('#tree');
 
 function createTree(element, data) {
-  if (!element || !data || typeof data !== 'object') {
+  if (!element || !data || typeof data !== 'object' || data === null) {
     return;
   }
 
@@ -30,16 +30,17 @@ function createTree(element, data) {
 
     li.textContent = key;
 
-    if (typeof data[key] === 'object' && data[key] !== null) {
+    if (
+      typeof data[key] === 'object' &&
+      data[key] !== null &&
+      Object.keys(data[key]).length > 0
+    ) {
       const ul = document.createElement('ul');
 
       li.appendChild(ul);
 
       createTree(ul, data[key]);
-    } else {
-      li.textContent = `${key}: ${data[key]}`;
     }
-
     element.appendChild(li);
   });
 }
