@@ -21,7 +21,7 @@ const food = {
 const tree = document.querySelector('#tree');
 
 function createTree(element, data) {
-  if (!element) {
+  if (!element || !data || typeof data !== 'object') {
     return;
   }
 
